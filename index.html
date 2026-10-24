@@ -28,7 +28,41 @@ function addCart(id){
 function productCard(p){const card=node('article','');card.className='product';const img=document.createElement('img');img.src=safeUrl(p.image_url)||'assets/logo.jpg';img.alt=p.name;img.loading='lazy';const info=node('div','');info.className='info';info.append(node('h3',p.name),node('div',p.description||p.category));info.lastChild.className='muted';const price=node('div',money(p.price));price.className='price';const b=node('button','＋ أضف إلى السلة');b.className='soft';b.onclick=()=>{addCart(p.id);b.textContent='✓ تمت الإضافة';setTimeout(()=>b.textContent='＋ أضف إلى السلة',850)};info.append(price,b);card.append(img,info);return card}
 function renderProducts(){const q=$('search').value.trim().toLowerCase(),list=products.filter(p=>p.active&&[p.name,p.description,p.category].some(x=>x.toLowerCase().includes(q)));$('products').replaceChildren(...list.map(productCard));$('productCount').textContent=list.length+' منتج';if(!list.length)$('products').append(node('p','لا توجد منتجات حالياً'))}
 function renderCart(){const root=$('cartItems');root.replaceChildren();for(const {p,qty} of cartEntries()){const r=node('div','');r.className='cartRow';const im=document.createElement('img');im.src=safeUrl(p.image_url)||'assets/logo.jpg';const text=node('div','');text.className='grow';text.append(node('strong',p.name),node('div',money(p.price)));const c=node('div','');c.className='count';const minus=node('button','−'),plus=node('button','+');minus.className=plus.className='small soft';minus.onclick=()=>{cart[p.id]--;if(cart[p.id]<=0)delete cart[p.id];saveCart();renderCart()};plus.onclick=()=>{cart[p.id]=Math.min(99,cart[p.id]+1);saveCart();renderCart()};c.append(minus,node('span',qty),plus);r.append(im,text,c);root.append(r)}if(!cartEntries().length)root.append(node('div','سلتك فارغة'));$('cartSubtotal').textContent=money(subtotal());$('cartDelivery').textContent=money(config.delivery_fee);$('cartTotal').textContent=money(subtotal()+config.delivery_fee);$('checkoutBtn').disabled=!cartEntries().length}
-function applyConfig(){for(const [id,value] of [['brandName',config.name],['heroName',config.name],['subtitle',config.subtitle]])$(id).textContent=value;const social=$('social');social.replaceChildren();for(const [title,url] of [['إنستغرام',config.instagram],['تيك توك',config.tiktok]]){const href=safeUrl(url);if(href){const a=node('a',title);a.href=href;a.target='_blank';a.rel='noopener noreferrer';social.append(a)}}}
+function applyConfig(){
+  for(const [id,value] of [
+    ['brandName',config.name],
+    ['heroName',config.name],
+    ['subtitle',config.subtitle]
+  ]) $(id).textContent=value;
+
+  const social=$('social');
+  social.replaceChildren();
+
+  const icons={
+    instagram:`<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`,
+    tiktok:`<svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M16.7 2c.3 2.6 1.8 4.2 4.3 4.4v3.6c-1.8 0-3.4-.5-4.8-1.5v6.8c0 4-3.1 6.8-6.9 6.8a6.8 6.8 0 0 1-1-13.5v3.8a3 3 0 1 0 4 2.9V2h4.4z"/></svg>`
+  };
+
+  for(const [title,url,icon] of [
+    ['إنستغرام',config.instagram,'instagram'],
+    ['تيك توك',config.tiktok,'tiktok']
+  ]){
+    const href=safeUrl(url);
+    if(href){
+      const a=document.createElement('a');
+      a.href=href;
+      a.target='_blank';
+      a.rel='noopener noreferrer';
+      a.setAttribute('aria-label',title);
+      a.title=title;
+      a.innerHTML=icons[icon];
+      a.style.display='inline-flex';
+      a.style.alignItems='center';
+      a.style.justifyContent='center';
+      social.append(a);
+    }
+  }
+}
 async function loadShop(){if(!db){$('products').append(node('p','أضف رابط ومفتاح Supabase في index.html لتشغيل المتجر'));return}const [pr,st]=await Promise.all([db.from('store_products').select('*').eq('active',true).order('created_at',{ascending:false}),db.from('store_config').select('*').eq('id',1).single()]);if(pr.error)$('products').append(node('p','تعذر تحميل المنتجات: '+pr.error.message));else{products=pr.data||[];renderProducts()}if(st.data){config=st.data;applyConfig()}saveCart()}
 $('search').oninput=renderProducts;$('homeBtn').onclick=()=>show('shop');$('backShop').onclick=()=>show('shop');$('cartBtn').onclick=()=>{renderCart();show('cart')};$('checkoutBtn').onclick=()=>{if(cartEntries().length)show('checkout')};
 for(const province of ['بغداد','البصرة','نينوى','أربيل','النجف','كربلاء','ذي قار','ميسان','المثنى','القادسية','واسط','بابل','ديالى','الأنبار','صلاح الدين','كركوك','دهوك','السليمانية'])$('checkoutForm').elements.province.add(new Option(province,province));
