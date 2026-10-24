@@ -26,8 +26,43 @@ html[data-theme="dark"] textarea {
   color: #ffffff;
   border-color: #555;
 }
+/* تنسيق صورة واجهة المتجر */
+.hero {
+  position: relative;
+  min-height: 240px;
+  padding-left: 45%;
+  box-sizing: border-box;
+}
+
+.heroImage {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* تنسيق الموبايل */
+@media (max-width: 600px) {
+  .hero {
+    padding-left: 15px;
+  }
+
+  .heroImage {
+    position: static;
+    transform: none;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    margin-bottom: 15px;
+  }
+}
 </style></head><body><header><div class="bar"><div class="brand"><img src="assets/logo.jpg" alt="شعار الإبداع"><span id="brandName">الإبداع للنقش بالليزر</span></div><div class="actions"><button class="soft small" id="homeBtn">المتجر</button><button class="soft small" id="themeBtn" type="button">🌙</button><button class="soft small" id="cartBtn">🛒 <span id="cartCount">0</span></button><button class="dark small hidden" id="adminBtn" tabindex="-1" aria-hidden="true">الإدارة</button></div></div></header><main class="wrap">
-<section id="shopPage"><div class="hero"><h1 id="heroName">الإبداع للنقش بالليزر</h1><p id="subtitle">هدايا ومنتجات مميزة</p><div class="social" id="social"></div></div><div class="sectionTitle"><h2>منتجاتنا</h2><span class="muted" id="productCount"></span></div><input class="search" id="search" placeholder="ابحث في المنتجات أو التصنيفات"><div class="grid" id="products"></div></section>
+<section id="shopPage"><div class="hero"><img class="heroImage" src="assets/hero-banner.png" alt="منتجات النقش بالليزر"><h1 id="heroName">الإبداع للنقش بالليزر</h1><p id="subtitle">هدايا ومنتجات مميزة</p><div class="social" id="social"></div></div><div class="sectionTitle"><h2>منتجاتنا</h2><span class="muted" id="productCount"></span></div><input class="search" id="search" placeholder="ابحث في المنتجات أو التصنيفات"><div class="grid" id="products"></div></section>
 <section id="cartPage" class="hidden"><h2>سلة المشتريات</h2><div class="panel" id="cartItems"></div><div class="panel"><div class="totals"><span>مجموع المنتجات</span><span id="cartSubtotal"></span></div><div class="totals"><span>التوصيل</span><span id="cartDelivery"></span></div><div class="totals"><span>الإجمالي</span><span id="cartTotal"></span></div><button id="checkoutBtn">متابعة إلى تفاصيل التوصيل</button></div></section>
 <section id="checkoutPage" class="hidden"><h2>إتمام الطلب</h2><div class="steps"><div class="step on"><b>1</b>تفاصيل التوصيل</div><div class="step"><b>2</b>مراجعة الطلب</div><div class="step"><b>3</b>تم التأكيد</div></div><form id="checkoutForm" class="panel"><div class="formGrid"><label class="field">اسم الزبون *<input name="name" required minlength="2" maxlength="120"></label><label class="field">رقم الهاتف العراقي *<input name="phone" type="tel" required pattern="[0-9+ -]{10,20}" placeholder="07xxxxxxxxx"></label><label class="field">المحافظة *<select name="province" required><option value="">اختر المحافظة</option></select></label><label class="field">المدينة / المنطقة *<input name="district" required minlength="2" maxlength="120"></label><label class="field full">العنوان التفصيلي / أقرب نقطة دالة *<textarea name="address" required minlength="5" maxlength="500"></textarea></label><label class="field full">ملاحظات الطلب (اختياري)<textarea name="notes" maxlength="1000"></textarea></label></div><div class="notice">الدفع عند الاستلام. لا يحتاج الزبون إلى حساب. تأكيد الهاتف برسالة غير مفعّل حالياً.</div><button id="sendOrder" type="submit">مراجعة الطلب</button><div id="checkoutMsg"></div></form><div id="review" class="panel hidden"><h3>مراجعة الطلب قبل الإرسال</h3><div id="reviewDetails"></div><div class="row"><button id="confirmOrder">تأكيد وإرسال الطلب</button><button class="soft" id="editOrder">تعديل التفاصيل</button></div></div></section>
 <section id="donePage" class="hidden"><div class="panel" style="text-align:center;padding:55px 20px"><h1>✅ تم استلام طلبك</h1><p id="doneText"></p><button id="backShop">العودة للمتجر</button></div></section>
