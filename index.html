@@ -178,6 +178,57 @@ html[data-theme="dark"] .transfer-details small{color:#e2ebf5}
 .product .favorite-btn.saved{color:#cf3e56!important}
 @media(max-width:700px){.promo-track{aspect-ratio:1.9/1;min-height:170px}.promo-slide img{object-fit:contain}.slide-arrow{width:30px;height:30px;font-size:14px}.slide-prev{right:6px}.slide-next{left:6px}.product .favorite-btn{top:7px!important;left:7px!important;width:31px!important;height:31px!important;min-width:31px!important;max-width:31px!important;min-height:31px!important;padding:6px!important}}
 @media(prefers-reduced-motion:reduce){.promo-slide{transition:none}}
+
+/* إصلاح ظهور أزرار الرجوع والكمية في الوضعين الليلي والنهاري */
+#editOrder.soft {
+  background: #f0c35f !important;
+  background-color: #f0c35f !important;
+  color: #0a2443 !important;
+  border: 1px solid #ffdc8b !important;
+  min-width: 124px;
+  min-height: 44px;
+  opacity: 1 !important;
+  font-weight: 900;
+}
+#editOrder.soft:hover, #editOrder.soft:focus-visible {
+  background: #ffdb88 !important;
+  background-color: #ffdb88 !important;
+}
+.count {display:flex;align-items:center;justify-content:center;gap:10px;direction:ltr;flex-shrink:0}
+.count button.small.soft {
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  width:38px !important;
+  min-width:38px;
+  height:38px !important;
+  min-height:38px;
+  padding:0 !important;
+  background:#f1c769 !important;
+  background-color:#f1c769 !important;
+  color:#071c36 !important;
+  font-size:24px !important;
+  font-weight:900 !important;
+  line-height:1;
+  border:1px solid #dbac48;
+  border-radius:10px;
+  opacity:1 !important;
+}
+.count button.small.soft:hover {background:#ffdc8b !important;background-color:#ffdc8b !important}
+.count span {display:inline-block;min-width:24px;text-align:center;font-size:17px;font-weight:900;color:inherit}
+html[data-theme="dark"] .count span {color:#fff !important}
+/* خيار البطاقة ظاهر باستمرار ولكن لا يمكن اختياره قبل التفعيل الفعلي */
+.payment-choice.unavailable {opacity:.78;cursor:not-allowed;flex-wrap:wrap}
+.payment-choice.unavailable input {cursor:not-allowed}
+.payment-availability {margin-inline-start:auto;font-size:12px;line-height:1.5;color:#566a86}
+html[data-theme="dark"] .payment-availability {color:#d5e4f8}
+@media(max-width:650px){
+  #review .row {gap:10px}
+  #review .row button {min-height:44px}
+  .count{gap:6px}
+  .count button.small.soft{width:36px !important;min-width:36px;height:36px !important;min-height:36px;font-size:22px !important}
+  .payment-availability{width:100%;padding-inline-start:27px;margin-inline-start:0}
+}
 </style></head><body><header class="site-header">
   <div class="topline"><div class="topline-inner"><div class="topline-items"><span>✦ نقش وهدايا حسب الطلب</span><span>◈ الدفع عند الاستلام</span><span>✦ نهتم بالتفاصيل</span></div><div class="top-highlight">✦ الهدية تصير أحلى بلمستك</div></div></div>
   <div class="main-nav">
@@ -216,7 +267,7 @@ html[data-theme="dark"] .transfer-details small{color:#e2ebf5}
 <div class="payment-select-box" id="paymentSelectBox">
   <h3>طريقة الدفع</h3>
   <label class="payment-choice"><input type="radio" name="payment_method" value="cod" checked> <span>💵 الدفع عند الاستلام</span></label>
-  <label class="payment-choice hidden" id="transferChoice"><input type="radio" name="payment_method" value="transfer"> <span>💳 تحويل إلى ماستر كارد الرافدين</span></label>
+  <label class="payment-choice unavailable" id="transferChoice"><input type="radio" name="payment_method" value="transfer" disabled> <span>💳 تحويل إلى ماستر كارد الرافدين</span><small id="transferAvailability" class="payment-availability">غير مفعّل حالياً</small></label>
   <div id="transferFields" class="transfer-details hidden">
     <strong>بيانات استلام التحويل</strong>
     <div id="transferBank"></div>
@@ -324,7 +375,7 @@ function renderProducts(){
  const root=$('products');root.replaceChildren(...list.map(productCard));$('productCount').textContent=list.length+' منتج';
  if(!list.length){const empty=node('div','');empty.className='empty-state';const icon=node('div','✧');icon.className='empty-icon';const title=node('strong',products.length?'ماكو منتجات تطابق البحث حالياً':'منتجاتنا الجديدة بالطريق');const detail=node('p',products.length?'جرّب تصنيف ثاني أو امسح كلمة البحث.':'قريباً راح تشوف منتجات النقش والهدايا الخاصة هنا.');empty.append(icon,title,detail);if(products.length){const reset=node('button','عرض كل المنتجات');reset.onclick=()=>{activeCategory='';$('search').value='';renderCategoryTiles();renderProducts()};empty.append(reset)}root.append(empty)}
 }
-function renderCart(){const root=$('cartItems');root.replaceChildren();for(const {p,qty} of cartEntries()){const r=node('div','');r.className='cartRow';const im=document.createElement('img');im.src=safeUrl(p.image_url)||'assets/logo.jpg';const text=node('div','');text.className='grow';text.append(node('strong',p.name),node('div',money(p.price)));const c=node('div','');c.className='count';const minus=node('button','−'),plus=node('button','+');minus.className=plus.className='small soft';minus.onclick=()=>{cart[p.id]--;if(cart[p.id]<=0)delete cart[p.id];saveCart();renderCart()};plus.onclick=()=>{cart[p.id]=Math.min(99,cart[p.id]+1);saveCart();renderCart()};c.append(minus,node('span',qty),plus);r.append(im,text,c);root.append(r)}if(!cartEntries().length)root.append(node('div','سلتك فارغة'));$('cartSubtotal').textContent=money(subtotal());$('cartDelivery').textContent=money(config.delivery_fee);$('cartTotal').textContent=money(subtotal()+config.delivery_fee);$('checkoutBtn').disabled=!cartEntries().length}
+function renderCart(){const root=$('cartItems');root.replaceChildren();for(const {p,qty} of cartEntries()){const r=node('div','');r.className='cartRow';const im=document.createElement('img');im.src=safeUrl(p.image_url)||'assets/logo.jpg';const text=node('div','');text.className='grow';text.append(node('strong',p.name),node('div',money(p.price)));const c=node('div','');c.className='count';const minus=node('button','−'),plus=node('button','+');minus.type=plus.type='button';minus.setAttribute('aria-label','تقليل الكمية');plus.setAttribute('aria-label','زيادة الكمية');minus.className=plus.className='small soft';minus.onclick=()=>{cart[p.id]--;if(cart[p.id]<=0)delete cart[p.id];saveCart();renderCart()};plus.onclick=()=>{cart[p.id]=Math.min(99,cart[p.id]+1);saveCart();renderCart()};c.append(minus,node('span',qty),plus);r.append(im,text,c);root.append(r)}if(!cartEntries().length)root.append(node('div','سلتك فارغة'));$('cartSubtotal').textContent=money(subtotal());$('cartDelivery').textContent=money(config.delivery_fee);$('cartTotal').textContent=money(subtotal()+config.delivery_fee);$('checkoutBtn').disabled=!cartEntries().length}
 function applyConfig(){
   for(const [id,value] of [
     ['brandName',config.name],
@@ -416,10 +467,21 @@ aSyncPaymentInit();
 async function aSyncPaymentInit(){
   if(!db)return;
   const {data,error}=await db.from('store_payment_settings').select('enabled,provider_name,recipient_name,transfer_details').eq('id',1).maybeSingle();
-  if(error){console.warn('Payment settings not available:',error.message);return}
+  if(error){
+    console.warn('Payment settings not available:',error.message);
+    $('transferAvailability').textContent='يتطلب إعداد بيانات التحويل من لوحة التحكم';
+    return;
+  }
   paymentSettings=data||paymentSettings;
   const available=!!(paymentSettings.enabled&&paymentSettings.transfer_details?.trim());
-  $('transferChoice').classList.toggle('hidden',!available);
+  $('transferChoice').classList.toggle('unavailable',!available);
+  $('transferChoice').querySelector('input').disabled=!available;
+  $('transferAvailability').classList.toggle('hidden',available);
+  $('transferAvailability').textContent='بانتظار تفعيل التحويل من لوحة التحكم';
+  if(!available&&chosenPayment()==='transfer'){
+    $('checkoutForm').querySelector('input[name="payment_method"][value="cod"]').checked=true;
+    updatePaymentUI();
+  }
   $('transferBank').textContent=paymentSettings.provider_name||'ماستر كارد الرافدين';
   $('transferRecipient').textContent=paymentSettings.recipient_name?'اسم المستلم: '+paymentSettings.recipient_name:'';
   $('transferAccount').textContent=paymentSettings.transfer_details||'';
