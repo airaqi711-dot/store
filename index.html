@@ -229,18 +229,140 @@ html[data-theme="dark"] .payment-availability {color:#d5e4f8}
   .count button.small.soft{width:36px !important;min-width:36px;height:36px !important;min-height:36px;font-size:22px !important}
   .payment-availability{width:100%;padding-inline-start:27px;margin-inline-start:0}
 }
-  
+/* زر نسخ معلومات التحويل: واضح بالوضعين الليلي والنهاري */
 #copyAccount,
 html[data-theme="dark"] #copyAccount {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 116px;
+  min-height: 40px;
+  padding: 9px 13px !important;
+  flex: 0 0 auto;
   background: #e9b650 !important;
   color: #071e3b !important;
   border: 1px solid #d39b2d !important;
-  border-radius: 10px !important;
-  padding: 10px 15px !important;
-  width: auto !important;
-  min-width: 115px;
-  opacity: 1 !important;
+  border-radius: 10px;
   font-weight: bold;
+  opacity: 1 !important;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#copyAccount:hover,
+#copyAccount:focus-visible {
+  background: #ffcf74 !important;
+  color: #071e3b !important;
+}
+
+
+/* ===== ألوان الوضع النهاري الجديدة: كحلي #1C3168 + تركوازي #1C8CA0 ===== */
+/* جميع القواعد محصورة بالنهاري؛ الوضع الليلي محفوظ كما هو. */
+html:not([data-theme="dark"]) {
+  --navy: #1c3168;
+  --navy2: #233e78;
+  --gold: #1c8ca0;
+  --gold2: #68d0db;
+  --ink: #172c55;
+  --sub: #566b80;
+  --stroke: #dce8ef;
+  --paper: #ffffff;
+  --stage: #f4f8fb;
+}
+html:not([data-theme="dark"]) header.site-header,
+html:not([data-theme="dark"]) .main-nav,
+html:not([data-theme="dark"]) .mobile-menu {
+  background: #1c3168;
+  color: #ffffff;
+}
+html:not([data-theme="dark"]) .topline {
+  background: #162853;
+}
+html:not([data-theme="dark"]) .site-brand .wordmark,
+html:not([data-theme="dark"]) .navlinks button,
+html:not([data-theme="dark"]) .mobile-menu button {
+  color: #ffffff;
+}
+html:not([data-theme="dark"]) .site-brand .wordmark small {
+  color: #8cdee7;
+}
+html:not([data-theme="dark"]) .navlinks button:hover,
+html:not([data-theme="dark"]) .navlinks .nav-home {
+  background: #1c8ca0;
+  color: #ffffff;
+}
+html:not([data-theme="dark"]) .top-highlight,
+html:not([data-theme="dark"]) .gold,
+html:not([data-theme="dark"]) .button-gold {
+  background: linear-gradient(105deg, #16788b, #1c8ca0) !important;
+  color: #ffffff !important;
+}
+html:not([data-theme="dark"]) .category-card {
+  background: linear-gradient(145deg, #ffffff, #e8f5f8);
+  border-color: #d4e9ee !important;
+}
+html:not([data-theme="dark"]) .category-card svg,
+html:not([data-theme="dark"]) .benefit .benefit-symbol {
+  stroke: #1c8ca0;
+  color: #1c8ca0;
+}
+html:not([data-theme="dark"]) .category-card:hover,
+html:not([data-theme="dark"]) .category-card.active {
+  background: linear-gradient(145deg, #d4f2f5, #ffffff);
+  border-color: #1c8ca0 !important;
+  box-shadow: 0 6px 18px #1c8ca020;
+}
+html:not([data-theme="dark"]) .filter-chip.selected,
+html:not([data-theme="dark"]) .mobile-bottom-nav button.active {
+  background: #1c3168 !important;
+  color: #81e0e9;
+}
+html:not([data-theme="dark"]) .product {
+  border-color: #dce8ef;
+}
+html:not([data-theme="dark"]) .price,
+html:not([data-theme="dark"]) .product .price {
+  color: #146e83;
+}
+html:not([data-theme="dark"]) .product .add-btn:hover {
+  background: #273f7d;
+}
+html:not([data-theme="dark"]) .site-footer .footer-inner h3 {
+  color: #80dbe5;
+}
+html:not([data-theme="dark"]) .float-cart {
+  color: #80dbe5;
+}
+html:not([data-theme="dark"]) .slide-dots button.is-active {
+  background: #1c8ca0;
+}
+html:not([data-theme="dark"]) .payment-select-box {
+  background: #eff9fb;
+  border-color: #c6e5ea;
+}
+html:not([data-theme="dark"]) .payment-choice input {
+  accent-color: #1c8ca0;
+}
+html:not([data-theme="dark"]) #paymentNotice.notice {
+  background: #eaf7f9 !important;
+  border-color: #b6dce3 !important;
+  color: #1c3168 !important;
+}
+/* حافظ على وضوح أزرار الرجوع والعدد ونسخ بيانات التحويل. */
+html:not([data-theme="dark"]) #editOrder.soft,
+html:not([data-theme="dark"]) .count button.small.soft,
+html:not([data-theme="dark"]) #copyAccount {
+  background: #146e83 !important;
+  background-color: #146e83 !important;
+  border-color: #146e83 !important;
+  color: #ffffff !important;
+}
+html:not([data-theme="dark"]) #editOrder.soft:hover,
+html:not([data-theme="dark"]) .count button.small.soft:hover,
+html:not([data-theme="dark"]) #copyAccount:hover {
+  background: #1c8ca0 !important;
+  background-color: #1c8ca0 !important;
+  color: #ffffff !important;
 }
 
 </style></head><body><header class="site-header">
