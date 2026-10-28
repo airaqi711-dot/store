@@ -369,6 +369,52 @@ html:not([data-theme="dark"]) #copyAccount:hover {
 /* أجرة التوصيل حسب المحافظة */
 .delivery-estimate{grid-column:1/-1;padding:12px 16px;background:#e8f8f8;border:1px solid #95cfd3;border-radius:12px;color:#13344b;font-weight:700;line-height:1.8}
 html[data-theme="dark"] .delivery-estimate{background:#183954;border-color:#49738c;color:#f4fcff}
+
+/* ===== بطاقات المنتجات: الصورة ضبابية وراء المعلومات والنص يبقى واضح ===== */
+.product .info {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #ecf5f9;
+  border-top: 1px solid rgba(255,255,255,.65);
+}
+/* نسخة مشوشة من صورة المنتج خلف التفاصيل فقط؛ لا نشوّش الكتابة نفسها */
+.product .info::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  z-index: -2;
+  pointer-events: none;
+  background-image: var(--card-photo, none);
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px) saturate(.8);
+  transform: scale(1.05);
+}
+/* طبقة شفافة فاتحة لضمان وضوح اسم المنتج والسعر */
+.product .info::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(248,252,255,.70);
+}
+.product .info h3 { color: #102c58; text-shadow: none; }
+.product .info .muted { color: #455b74; }
+html:not([data-theme="dark"]) .product .info .price { color: #146e83; }
+/* الوضع الليلي: نفس الضباب لكن بطبقة داكنة والنص واضح */
+html[data-theme="dark"] .product .info {
+  background: #1b2c45;
+  border-top-color: rgba(255,255,255,.12);
+}
+html[data-theme="dark"] .product .info::after {
+  background: rgba(18,33,56,.74);
+}
+html[data-theme="dark"] .product .info h3 { color: #f7f9ff; }
+html[data-theme="dark"] .product .info .muted { color: #d6e1f0; }
+html[data-theme="dark"] .product .info .price { color: #f4c268; }
+
 </style></head><body><header class="site-header">
   <div class="topline"><div class="topline-inner"><div class="topline-items"><span>✦ نقش وهدايا حسب الطلب</span><span>◈ الدفع عند الاستلام</span><span>✦ نهتم بالتفاصيل</span></div><div class="top-highlight">✦ الهدية تصير أحلى بلمستك</div></div></div>
   <div class="main-nav">
@@ -504,7 +550,12 @@ function productCard(p){
  const love=document.createElement('button');love.type='button';love.className='favorite-btn'+(liked.has(p.id)?' saved':'');love.setAttribute('aria-label',liked.has(p.id)?'إزالة من المفضلة':'أضف إلى المفضلة');love.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>';
  love.onclick=()=>{if(liked.has(p.id))liked.delete(p.id);else liked.add(p.id);try{localStorage.setItem('ibdaa_favorites',JSON.stringify([...liked]))}catch{}love.classList.toggle('saved',liked.has(p.id));love.setAttribute('aria-label',liked.has(p.id)?'إزالة من المفضلة':'أضف إلى المفضلة')};
  const imageWrap=document.createElement('div');imageWrap.style.position='relative';imageWrap.append(photo,love);
- const info=node('div','');info.className='info';const name=node('h3',p.name);name.tabIndex=0;name.onclick=()=>openProduct(p);name.onkeydown=e=>{if(e.key==='Enter')openProduct(p)};
+ const info=node('div','');info.className='info';
+ // نستخدم نفس صورة المنتج كخلفية ضبابية في منطقة التفاصيل فقط.
+ const updateBlurImage=()=>info.style.setProperty('--card-photo','url('+JSON.stringify(img.src)+')');
+ updateBlurImage();
+ img.addEventListener('error',updateBlurImage,{once:true});
+ const name=node('h3',p.name);name.tabIndex=0;name.onclick=()=>openProduct(p);name.onkeydown=e=>{if(e.key==='Enter')openProduct(p)};
  const note=node('div',p.description||p.category||'');note.className='muted';
  const price=node('div',money(p.price));price.className='price';
  const b=node('button','🛒 أضف إلى السلة');b.type='button';b.className='add-btn';b.onclick=()=>{addCart(p.id);b.textContent='✓ تمت الإضافة';setTimeout(()=>b.textContent='🛒 أضف إلى السلة',1100)};
