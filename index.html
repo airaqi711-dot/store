@@ -365,6 +365,10 @@ html:not([data-theme="dark"]) #copyAccount:hover {
   color: #ffffff !important;
 }
 
+
+/* أجرة التوصيل حسب المحافظة */
+.delivery-estimate{grid-column:1/-1;padding:12px 16px;background:#e8f8f8;border:1px solid #95cfd3;border-radius:12px;color:#13344b;font-weight:700;line-height:1.8}
+html[data-theme="dark"] .delivery-estimate{background:#183954;border-color:#49738c;color:#f4fcff}
 </style></head><body><header class="site-header">
   <div class="topline"><div class="topline-inner"><div class="topline-items"><span>✦ نقش وهدايا حسب الطلب</span><span>◈ الدفع عند الاستلام</span><span>✦ نهتم بالتفاصيل</span></div><div class="top-highlight">✦ الهدية تصير أحلى بلمستك</div></div></div>
   <div class="main-nav">
@@ -399,7 +403,7 @@ html:not([data-theme="dark"]) #copyAccount:hover {
   <section id="aboutSection" class="benefits" aria-label="عن المتجر"><div class="benefit"><span class="benefit-symbol">✧</span><div><strong>لمسة خاصة لكل هدية</strong><span>خيارات متنوعة من النقش والتصميم حسب الطلب</span></div></div><div class="benefit"><span class="benefit-symbol">♧</span><div><strong>هدايا تحكي قصة</strong><span>منتجات خشبية وأكريليك وتفاصيل تعكس ذوقك</span></div></div><div class="benefit"><span class="benefit-symbol">▣</span><div><strong>الدفع عند الاستلام</strong><span>اطلب من المتجر بدون الحاجة لإنشاء حساب</span></div></div></section>
 </section>
 <section id="cartPage" class="hidden"><h2>سلة المشتريات</h2><div class="panel" id="cartItems"></div><div class="panel"><div class="totals"><span>مجموع المنتجات</span><span id="cartSubtotal"></span></div><div class="totals"><span>التوصيل</span><span id="cartDelivery"></span></div><div class="totals"><span>الإجمالي</span><span id="cartTotal"></span></div><button id="checkoutBtn">متابعة إلى تفاصيل التوصيل</button></div></section>
-<section id="checkoutPage" class="hidden"><h2>إتمام الطلب</h2><div class="steps"><div class="step on"><b>1</b>تفاصيل التوصيل</div><div class="step"><b>2</b>مراجعة الطلب</div><div class="step"><b>3</b>تم التأكيد</div></div><form id="checkoutForm" class="panel"><div class="formGrid"><label class="field">اسم الزبون *<input name="name" required minlength="2" maxlength="120"></label><label class="field">رقم الهاتف العراقي *<input name="phone" type="tel" required pattern="[0-9+ -]{10,20}" placeholder="07xxxxxxxxx"></label><label class="field">المحافظة *<select name="province" required><option value="">اختر المحافظة</option></select></label><label class="field">المدينة / المنطقة *<input name="district" required minlength="2" maxlength="120"></label><label class="field full">العنوان التفصيلي / أقرب نقطة دالة *<textarea name="address" required minlength="5" maxlength="500"></textarea></label><label class="field full">ملاحظات الطلب (اختياري)<textarea name="notes" maxlength="1000"></textarea></label></div>
+<section id="checkoutPage" class="hidden"><h2>إتمام الطلب</h2><div class="steps"><div class="step on"><b>1</b>تفاصيل التوصيل</div><div class="step"><b>2</b>مراجعة الطلب</div><div class="step"><b>3</b>تم التأكيد</div></div><form id="checkoutForm" class="panel"><div class="formGrid"><label class="field">اسم الزبون *<input name="name" required minlength="2" maxlength="120"></label><label class="field">رقم الهاتف العراقي *<input name="phone" type="tel" required pattern="[0-9+ -]{10,20}" placeholder="07xxxxxxxxx"></label><label class="field">المحافظة *<select name="province" required><option value="">اختر المحافظة</option></select></label><div id="deliveryEstimate" class="delivery-estimate" role="status" aria-live="polite">🚚 التوصيل: 3,000 د.ع داخل البصرة، و5,000 د.ع لباقي المحافظات. اختار المحافظة لحساب الإجمالي.</div><label class="field">المدينة / المنطقة *<input name="district" required minlength="2" maxlength="120"></label><label class="field full">العنوان التفصيلي / أقرب نقطة دالة *<textarea name="address" required minlength="5" maxlength="500"></textarea></label><label class="field full">ملاحظات الطلب (اختياري)<textarea name="notes" maxlength="1000"></textarea></label></div>
 <div class="payment-select-box" id="paymentSelectBox">
   <h3>طريقة الدفع</h3>
   <label class="payment-choice"><input type="radio" name="payment_method" value="cod" checked> <span>💵 الدفع عند الاستلام</span></label>
@@ -511,7 +515,7 @@ function renderProducts(){
  const root=$('products');root.replaceChildren(...list.map(productCard));$('productCount').textContent=list.length+' منتج';
  if(!list.length){const empty=node('div','');empty.className='empty-state';const icon=node('div','✧');icon.className='empty-icon';const title=node('strong',products.length?'ماكو منتجات تطابق البحث حالياً':'منتجاتنا الجديدة بالطريق');const detail=node('p',products.length?'جرّب تصنيف ثاني أو امسح كلمة البحث.':'قريباً راح تشوف منتجات النقش والهدايا الخاصة هنا.');empty.append(icon,title,detail);if(products.length){const reset=node('button','عرض كل المنتجات');reset.onclick=()=>{activeCategory='';$('search').value='';renderCategoryTiles();renderProducts()};empty.append(reset)}root.append(empty)}
 }
-function renderCart(){const root=$('cartItems');root.replaceChildren();for(const {p,qty} of cartEntries()){const r=node('div','');r.className='cartRow';const im=document.createElement('img');im.src=safeUrl(p.image_url)||'assets/logo.jpg';const text=node('div','');text.className='grow';text.append(node('strong',p.name),node('div',money(p.price)));const c=node('div','');c.className='count';const minus=node('button','−'),plus=node('button','+');minus.type=plus.type='button';minus.setAttribute('aria-label','تقليل الكمية');plus.setAttribute('aria-label','زيادة الكمية');minus.className=plus.className='small soft';minus.onclick=()=>{cart[p.id]--;if(cart[p.id]<=0)delete cart[p.id];saveCart();renderCart()};plus.onclick=()=>{cart[p.id]=Math.min(99,cart[p.id]+1);saveCart();renderCart()};c.append(minus,node('span',qty),plus);r.append(im,text,c);root.append(r)}if(!cartEntries().length)root.append(node('div','سلتك فارغة'));$('cartSubtotal').textContent=money(subtotal());$('cartDelivery').textContent=money(config.delivery_fee);$('cartTotal').textContent=money(subtotal()+config.delivery_fee);$('checkoutBtn').disabled=!cartEntries().length}
+function renderCart(){const root=$('cartItems');root.replaceChildren();for(const {p,qty} of cartEntries()){const r=node('div','');r.className='cartRow';const im=document.createElement('img');im.src=safeUrl(p.image_url)||'assets/logo.jpg';const text=node('div','');text.className='grow';text.append(node('strong',p.name),node('div',money(p.price)));const c=node('div','');c.className='count';const minus=node('button','−'),plus=node('button','+');minus.type=plus.type='button';minus.setAttribute('aria-label','تقليل الكمية');plus.setAttribute('aria-label','زيادة الكمية');minus.className=plus.className='small soft';minus.onclick=()=>{cart[p.id]--;if(cart[p.id]<=0)delete cart[p.id];saveCart();renderCart()};plus.onclick=()=>{cart[p.id]=Math.min(99,cart[p.id]+1);saveCart();renderCart()};c.append(minus,node('span',qty),plus);r.append(im,text,c);root.append(r)}if(!cartEntries().length)root.append(node('div','سلتك فارغة'));$('cartSubtotal').textContent=money(subtotal());const fee=deliveryByProvince();$('cartDelivery').textContent=fee===null?'3,000–5,000 IQD (حسب المحافظة)':money(fee);$('cartTotal').textContent=fee===null?'يُحسب بعد تحديد المحافظة':money(subtotal()+fee);$('checkoutBtn').disabled=!cartEntries().length}
 function applyConfig(){
   for(const [id,value] of [
     ['brandName',config.name],
@@ -550,7 +554,7 @@ function applyConfig(){
   }
 }
 async function loadShop(){if(!db){$('products').append(node('p','أضف رابط ومفتاح Supabase في index.html لتشغيل المتجر'));return}const [pr,st]=await Promise.all([db.from('store_products').select('*').eq('active',true).order('created_at',{ascending:false}),db.from('store_config').select('*').eq('id',1).single()]);if(pr.error){$('products').replaceChildren(node('p','تعذر تحميل المنتجات: '+pr.error.message));}else{products=pr.data||[];renderCategoryTiles();renderProducts()}if(st.data){config=st.data;applyConfig();updatePaymentUI()}saveCart()}
-$('search').oninput=renderProducts;$('homeBtn').onclick=()=>show('shop');$('backShop').onclick=()=>show('shop');$('cartBtn').onclick=()=>{renderCart();show('cart')};$('checkoutBtn').onclick=()=>{if(cartEntries().length){updatePaymentUI();show('checkout')}};
+$('search').oninput=renderProducts;$('homeBtn').onclick=()=>show('shop');$('backShop').onclick=()=>show('shop');$('cartBtn').onclick=()=>{renderCart();show('cart')};$('checkoutBtn').onclick=()=>{if(cartEntries().length){refreshDeliveryEstimate();updatePaymentUI();show('checkout')}};
 for(const province of ['بغداد','البصرة','نينوى','أربيل','النجف','كربلاء','ذي قار','ميسان','المثنى','القادسية','واسط','بابل','ديالى','الأنبار','صلاح الدين','كركوك','دهوك','السليمانية'])$('checkoutForm').elements.province.add(new Option(province,province));
 $('checkoutForm').onsubmit=e=>{e.preventDefault();if(!cartEntries().length)return;const f=new FormData(e.currentTarget),summary=$('reviewDetails');summary.replaceChildren();for(const [label,key] of [['الاسم','name'],['الهاتف','phone'],['المحافظة','province'],['المنطقة','district'],['العنوان','address'],['الملاحظات','notes']])summary.append(node('p',label+': '+(f.get(key)||'—')));for(const {p,qty} of cartEntries())summary.append(node('p',p.name+' × '+qty+' — '+money(p.price*qty)));summary.append(node('h3','الإجمالي: '+money(subtotal()+config.delivery_fee)));$('checkoutForm').classList.add('hidden');$('review').classList.remove('hidden')};
 $('editOrder').onclick=()=>{$('review').classList.add('hidden');$('checkoutForm').classList.remove('hidden')};
@@ -622,17 +626,33 @@ async function aSyncPaymentInit(){
   $('transferRecipient').textContent=paymentSettings.recipient_name?'اسم المستلم: '+paymentSettings.recipient_name:'';
   $('transferAccount').textContent=paymentSettings.transfer_details||'';
 }
+// الأسعار ثابتة حسب المحافظة، ويُعاد حساب الإجمالي لدى Supabase أيضاً.
+function deliveryByProvince(){
+  const province=String($('checkoutForm').elements.province.value||'').trim();
+  return province ? (province==='البصرة' ? 3000 : 5000) : null;
+}
+function refreshDeliveryEstimate(){
+  const amount=deliveryByProvince();
+  const province=$('checkoutForm').elements.province.value;
+  $('deliveryEstimate').textContent=amount===null
+    ? '🚚 التوصيل: 3,000 د.ع للبصرة، و5,000 د.ع لباقي المحافظات. اختار المحافظة لحساب المبلغ النهائي.'
+    : '🚚 أجرة التوصيل إلى '+province+': '+money(amount)+' — إجمالي الطلب: '+money(subtotal()+amount);
+}
+$('checkoutForm').elements.province.addEventListener('change',()=>{
+  refreshDeliveryEstimate();updatePaymentUI();renderCart();
+});
 function chosenPayment(){return $('checkoutForm').elements.payment_method.value||'cod'}
 function updatePaymentUI(){
   const transfer=chosenPayment()==='transfer';
   $('transferFields').classList.toggle('hidden',!transfer);
   $('receiptInput').required=transfer;
-  $('transferAmount').textContent='المبلغ المطلوب: '+money(subtotal()+Number(config.delivery_fee||0));
+  const delivery=deliveryByProvince();$('transferAmount').textContent=delivery===null?'اختار المحافظة أولاً لتحديد المبلغ المطلوب':'المبلغ المطلوب شاملاً التوصيل: '+money(subtotal()+delivery);
   $('paymentNotice').textContent=transfer?'التحويل ينتظر مراجعة وصول المبلغ من إدارة المتجر. لا ترسل صورة البطاقة أو بيانات سرية.':'الدفع عند الاستلام. لا يحتاج الزبون إلى حساب. تأكيد الهاتف برسالة غير مفعّل حالياً.';
 }
 $('checkoutForm').querySelectorAll('input[name="payment_method"]').forEach(r=>r.addEventListener('change',updatePaymentUI));
 $('copyAccount').onclick=async()=>{const val=paymentSettings.transfer_details||'';try{await navigator.clipboard.writeText(val);$('copyAccount').textContent='تم النسخ';setTimeout(()=>$('copyAccount').textContent='نسخ المعلومات',1200)}catch{window.prompt('انسخ المعلومات:',val)}};
 updatePaymentUI();
+refreshDeliveryEstimate();
 
 $('checkoutForm').onsubmit=e=>{
   e.preventDefault();if(!cartEntries().length)return;
@@ -642,16 +662,21 @@ $('checkoutForm').onsubmit=e=>{
     if(!file)return msg('checkoutMsg','اختار صورة وصل الدفع أولاً');
     if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5*1024*1024)return msg('checkoutMsg','الوصل لازم JPG أو PNG أو WEBP وبحجم أقل من 5 ميگابايت');
   }
+  const fee=deliveryByProvince();if(fee===null)return msg('checkoutMsg','اختار المحافظة حتى نحسب أجرة التوصيل');
   msg('checkoutMsg','');const f=new FormData(e.currentTarget),summary=$('reviewDetails');summary.replaceChildren();
   for(const [label,key] of [['الاسم','name'],['الهاتف','phone'],['المحافظة','province'],['المنطقة','district'],['العنوان','address'],['الملاحظات','notes']])summary.append(node('p',label+': '+(f.get(key)||'—')));
   for(const {p,qty} of cartEntries())summary.append(node('p',p.name+' × '+qty+' — '+money(p.price*qty)));
   summary.append(node('p','طريقة الدفع: '+(chosenPayment()==='transfer'?'تحويل إلكتروني - بانتظار المراجعة':'عند الاستلام')));
-  summary.append(node('h3','الإجمالي: '+money(subtotal()+Number(config.delivery_fee||0))));
+  summary.append(node('p','مجموع المنتجات: '+money(subtotal())));
+  summary.append(node('p','أجرة التوصيل: '+money(fee)));
+  summary.append(node('h3','الإجمالي شاملاً التوصيل: '+money(subtotal()+fee)));
   $('checkoutForm').classList.add('hidden');$('review').classList.remove('hidden');
 };
 $('confirmOrder').onclick=async()=>{
   if(!db)return alert('لم يتم ربط Supabase');if(!cartEntries().length)return alert('السلة فارغة');
-  const f=new FormData($('checkoutForm')),b=$('confirmOrder');b.disabled=true;
+  const f=new FormData($('checkoutForm')),b=$('confirmOrder');
+  if(deliveryByProvince()===null)return alert('اختار المحافظة أولاً');
+  b.disabled=true;
   const method=chosenPayment();
   try{
     let receiptPath=null;
