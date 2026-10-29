@@ -496,7 +496,7 @@ html[data-theme="dark"] .product .info .price { color: #f4c268; }
   </div>
 </div>
 <div class="notice" id="paymentNotice">الدفع عند الاستلام. لا يحتاج الزبون إلى حساب. تأكيد الهاتف برسالة غير مفعّل حالياً.</div><button id="sendOrder" type="submit">مراجعة الطلب</button><div id="checkoutMsg"></div></form><div id="review" class="panel hidden"><h3>مراجعة الطلب قبل الإرسال</h3><div id="reviewDetails"></div><div class="row"><button id="confirmOrder">تأكيد وإرسال الطلب</button><button class="soft" id="editOrder">تعديل التفاصيل</button></div></div></section>
-<section id="donePage" class="hidden"><div class="panel" style="text-align:center;padding:55px 20px"><h1>✅ تم استلام طلبك</h1><p id="doneText"></p><button id="backShop">العودة للمتجر</button></div></section>
+<section id="donePage" class="hidden"><div class="panel" style="text-align:center;padding:55px 20px"><h1>✅ تم استلام طلبك</h1><p id="doneText"></p><div id="customerReceiptPreview" aria-live="polite"></div><button type="button" id="printCustomerReceipt" class="gold hidden">🖨️ طباعة الوصل / حفظ PDF</button> <button id="backShop">العودة للمتجر</button></div></section>
 <section id="adminPage" class="hidden"><div id="loginPanel" class="panel"><h2>تسجيل دخول الإدارة</h2><form id="loginForm" class="formGrid"><label class="field">البريد الإلكتروني<input type="email" name="email" required></label><label class="field">كلمة المرور<input type="password" name="password" required></label><div class="full"><button>دخول</button></div></form><div id="loginMsg"></div></div><div id="adminContent" class="hidden"><div class="row" style="justify-content:space-between"><h2>لوحة التحكم</h2><button class="soft" id="logout">تسجيل الخروج</button></div><nav class="adminNav"><button data-tab="overview">نظرة عامة</button><button data-tab="catalog">المنتجات</button><button data-tab="orders">الطلبات</button><button data-tab="settings">إعدادات المتجر</button></nav><div id="overviewTab"><div class="metrics" id="metrics"></div><div class="panel"><h3>آخر الطلبات</h3><div id="recentOrders"></div></div></div><div id="catalogTab" class="hidden"><div class="panel"><h3 id="productFormTitle">إضافة منتج</h3><form id="productForm" class="formGrid"><input type="hidden" name="id"><label class="field">اسم المنتج<input name="name" required maxlength="150"></label><label class="field">السعر بالدينار<input name="price" type="number" min="0" max="100000000" required></label><label class="field">التصنيف<input name="category" required maxlength="80" value="عام"></label><label class="field">رابط صورة المنتج HTTPS<input name="image_url" type="url" placeholder="https://..."></label><label class="field full">روابط الصور الإضافية (كل رابط HTTPS بسطر)<textarea name="image_urls" placeholder="https://example.com/photo2.jpg&#10;https://example.com/photo3.jpg"></textarea></label><label class="field full">وصف المنتج<textarea name="description" maxlength="1000"></textarea></label><label class="field">الحالة<select name="active"><option value="true">معروض</option><option value="false">مخفي</option></select></label><div class="full row"><button>حفظ المنتج</button><button type="button" class="soft" id="clearProduct">منتج جديد</button></div></form><div id="productMsg"></div></div><div class="panel"><h3>قائمة المنتجات</h3><div id="adminProducts"></div></div></div><div id="ordersTab" class="hidden"><div class="panel"><h3>إدارة الطلبات</h3><input class="search" id="orderSearch" placeholder="بحث بالاسم أو الهاتف أو رقم الطلب"><div id="adminOrders"></div></div></div><div id="settingsTab" class="hidden"><div class="panel"><h3>إعدادات المتجر</h3><form id="settingsForm" class="formGrid"><label class="field">اسم المتجر<input name="name" required></label><label class="field">الوصف<input name="subtitle"></label><label class="field">إنستغرام (رابط كامل)<input name="instagram"></label><label class="field">تيك توك (رابط كامل)<input name="tiktok"></label><label class="field">رقم واتساب<input name="whatsapp"></label><label class="field">أجرة التوصيل بالدينار<input type="number" name="delivery_fee" min="0" required></label><div class="full"><button>حفظ الإعدادات</button></div></form><div id="settingsMsg"></div></div></div></div></section>
 </main><div id="galleryOverlay" class="galleryOverlay hidden" role="dialog" aria-modal="true" aria-label="تفاصيل المنتج"><div class="galleryBox"><button type="button" class="galleryClose dark small" id="galleryClose" aria-label="إغلاق">✕</button><img id="galleryMain" class="galleryMain" alt=""><div id="galleryThumbs" class="galleryThumbs"></div><h2 id="galleryName"></h2><p id="galleryDescription" class="muted"></p><div id="galleryPrice" class="price"></div><button id="galleryAdd" type="button">＋ أضف إلى السلة</button></div></div><footer class="site-footer" id="contactSection"><div class="footer-inner"><div><h3>الإبداع للنقش بالليزر</h3><p>هدايا مميزة بلمسة شخصية، ومنتجات نقش بالليزر تناسب مناسباتك وذكرياتك.</p></div><div><h3>روابط سريعة</h3><div class="footer-links"><button type="button" data-nav="home">الرئيسية</button><button type="button" data-nav="products">جميع المنتجات</button><button type="button" data-nav="categories">التصنيفات</button></div></div><div><h3>تواصل ويانا</h3><div id="social" class="social" aria-label="روابط التواصل الاجتماعي"></div></div></div><div class="foot-note">© الإبداع للنقش بالليزر — جميع الحقوق محفوظة</div></footer>
 <button class="float-cart" type="button" id="floatingCartBtn" title="سلة المشتريات" aria-label="فتح السلة"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.4 13.5a2 2 0 0 0 2 1.5H20a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="cart-bubble" id="floatingCartCount">0</span></button>
@@ -561,6 +561,64 @@ function msg(id,text,kind='error'){const e=$(id);e.textContent=text;e.className=
 function show(page){for(const id of ['shop','cart','checkout','done','admin'])$(id+'Page').classList.toggle('hidden',id!==page);window.scrollTo(0,0)}
 function saveCart(){try{localStorage.setItem('ibdaa_cart',JSON.stringify(cart))}catch{}const n=Object.values(cart).reduce((a,b)=>a+b,0);for(const id of ['cartCount','floatingCartCount','mobileCartCount'])if($(id))$(id).textContent=n}
 function node(tag,text){const e=document.createElement(tag);e.textContent=text;return e}
+
+// ===== قالب وصل الطلب الموحد للزبون والإدارة — تصميم RTL مستوحى من قالب Canva المعتمد =====
+const RECEIPT_CSS = `
+.receipt-document{--rnavy:#1c3168;--rteal:#1c8ca0;box-sizing:border-box;direction:rtl;text-align:right;font-family:Tahoma,Arial,sans-serif!important;background:#fff!important;color:#13233c!important;border:1px solid #d9e5ef;border-radius:14px;overflow:hidden;max-width:790px;margin:18px auto;box-shadow:0 12px 35px rgba(17,36,65,.09);line-height:1.75}
+.receipt-document *{box-sizing:border-box}
+.receipt-document .receipt-head{background:#1c3168!important;color:#fff!important;padding:25px 27px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:5px solid #1c8ca0}
+.receipt-document .receipt-brand{font-weight:900;font-size:23px;line-height:1.6;color:#fff!important}
+.receipt-document .receipt-brand small{display:block;font-size:12px;color:#d3e9f0!important;font-weight:400}
+.receipt-document .receipt-title{color:#fff!important;font-weight:900;letter-spacing:.2px;font-size:21px;text-align:left;white-space:nowrap}
+.receipt-document .receipt-body{padding:23px 27px}
+.receipt-document .receipt-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.receipt-document .receipt-info{border:1px solid #deebee;background:#f4f9fa!important;padding:10px 12px;border-radius:9px;min-width:0;overflow-wrap:anywhere}
+.receipt-document .receipt-label{font-size:11px;color:#517083!important;display:block}
+.receipt-document .receipt-value{font-weight:800;font-size:14px;color:#13233c!important}
+.receipt-document .receipt-section-title{font-size:16px;font-weight:900;color:#1c3168!important;margin:18px 0 9px;border-right:4px solid #1c8ca0;padding-right:10px}
+.receipt-document .receipt-table{border-collapse:collapse;width:100%;font-size:13px;text-align:right}
+.receipt-document .receipt-table th{background:#e6f3f5!important;color:#19334a!important;font-weight:800;padding:11px 8px;border-bottom:2px solid #c9e4ea}
+.receipt-document .receipt-table td{padding:10px 8px;color:#13233c!important;border-bottom:1px solid #e4edf1;overflow-wrap:anywhere}
+.receipt-document .receipt-table td.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+.receipt-document .receipt-sums{margin:16px 0 4px auto;width:min(100%,365px)}
+.receipt-document .receipt-sum{display:flex;justify-content:space-between;gap:12px;padding:9px 4px;border-bottom:1px solid #e0e7eb;font-size:14px}
+.receipt-document .receipt-sum strong{white-space:nowrap}
+.receipt-document .receipt-grand{background:#1c3168!important;border-radius:10px;margin-top:12px;padding:13px 15px;color:#fff!important;font-weight:900;font-size:18px}
+.receipt-document .receipt-grand span,.receipt-document .receipt-grand strong{color:#fff!important}
+.receipt-document .receipt-note{background:#f1f6f9!important;border-radius:9px;padding:11px 13px;font-size:12px;color:#334e63!important;overflow-wrap:anywhere;margin-top:16px}
+.receipt-document .receipt-footer{margin-top:22px;text-align:center;border-top:1px solid #e1ebf0;padding-top:15px;color:#1c8ca0!important;font-weight:bold;font-size:13px}
+@media(max-width:600px){.receipt-document .receipt-head{padding:17px 14px}.receipt-document .receipt-brand{font-size:17px}.receipt-document .receipt-title{font-size:16px}.receipt-document .receipt-body{padding:15px 12px}.receipt-document .receipt-meta{gap:8px}.receipt-document .receipt-info{padding:9px 7px}.receipt-document .receipt-value{font-size:12px}.receipt-document .receipt-table{font-size:11px}.receipt-document .receipt-table td,.receipt-document .receipt-table th{padding:8px 4px}.receipt-document .receipt-grand{font-size:15px}}
+@media print{@page{size:A4;margin:12mm}html,body{background:white!important;color:#13233c!important}.receipt-document{margin:0;max-width:none;box-shadow:none;border:1px solid #d9e5ef;break-inside:avoid;print-color-adjust:exact;-webkit-print-color-adjust:exact}.receipt-document .receipt-head,.receipt-document .receipt-grand,.receipt-document .receipt-table th{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+`;
+const receiptCssElement=document.createElement('style');receiptCssElement.textContent=RECEIPT_CSS;document.head.appendChild(receiptCssElement);
+function receiptEscape(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function receiptMoney(value){return Number(value||0).toLocaleString('en-US')+' IQD'}
+function receiptDate(value){const d=value?new Date(value):new Date();return Number.isNaN(d.getTime())?'—':d.toLocaleString('ar-IQ',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}
+function receiptMarkup(info){
+  const rows=Array.isArray(info.items)?info.items:[];
+  const subtotal=rows.length?rows.reduce((sum,it)=>sum+(Number(it.unit_price)||0)*(Number(it.quantity)||0),0):null;
+  const knownTotal=Number.isFinite(Number(info.total))?Number(info.total):null;
+  const delivery=info.delivery_fee!==undefined&&info.delivery_fee!==null?Number(info.delivery_fee):(subtotal!==null&&knownTotal!==null?knownTotal-subtotal:null);
+  const total=knownTotal!==null?knownTotal:(subtotal!==null&&delivery!==null?subtotal+delivery:null);
+  const valueOrDash=n=>n===null||!Number.isFinite(n)?'—':receiptMoney(n);
+  const field=(label,val)=>`<div class="receipt-info"><span class="receipt-label">${receiptEscape(label)}</span><span class="receipt-value">${receiptEscape(val||'—')}</span></div>`;
+  const itemRows=rows.length?rows.map(it=>`<tr><td>${receiptEscape(it.product_name||it.name||'منتج')}</td><td class="num">${receiptEscape(it.quantity)}</td><td class="num">${receiptEscape(receiptMoney(it.unit_price))}</td><td class="num">${receiptEscape(receiptMoney((Number(it.unit_price)||0)*(Number(it.quantity)||0)))}</td></tr>`).join(''):'<tr><td colspan="4">تفاصيل المنتجات غير متاحة في هذه النسخة، راجع الطلب بلوحة التحكم.</td></tr>';
+  const address=[info.province,info.district,info.address].filter(Boolean).join(' / ');
+  const details=info.notes?`<div class="receipt-note"><strong>ملاحظات الطلب:</strong> ${receiptEscape(info.notes)}</div>`:'';
+  return `<article class="receipt-document" aria-label="وصل طلب رقم ${receiptEscape(info.id)}"><div class="receipt-head"><div class="receipt-brand">${receiptEscape(info.store_name||'الإبداع للنقش بالليزر')}<small>منتجات وهدايا مخصصة بالنقش بالليزر</small></div><div class="receipt-title">وصل طلب<br><span dir="ltr">#${receiptEscape(info.id||'—')}</span></div></div><div class="receipt-body"><div class="receipt-meta">${field('رقم الطلب','#'+String(info.id||'—'))}${field('تاريخ الطلب',receiptDate(info.created_at))}${field('اسم الزبون',info.customer_name)}${field('رقم الهاتف',info.phone)}${field('عنوان التوصيل',address)}${field('حالة الطلب',info.status||'قيد الانتظار')}${field('طريقة الدفع',info.payment_method==='transfer'?'تحويل إلكتروني':'الدفع عند الاستلام')}${field('حالة الدفع',info.payment_label||(info.payment_method==='transfer'?'بانتظار تأكيد التحويل':'الدفع عند الاستلام'))}</div><h3 class="receipt-section-title">تفاصيل المنتجات</h3><table class="receipt-table"><thead><tr><th>المنتج</th><th>الكمية</th><th>سعر الوحدة</th><th>المجموع</th></tr></thead><tbody>${itemRows}</tbody></table><div class="receipt-sums"><div class="receipt-sum"><span>مجموع المنتجات</span><strong>${receiptEscape(valueOrDash(subtotal))}</strong></div><div class="receipt-sum"><span>أجور التوصيل</span><strong>${receiptEscape(valueOrDash(delivery))}</strong></div><div class="receipt-sum receipt-grand"><span>الإجمالي النهائي</span><strong>${receiptEscape(valueOrDash(total))}</strong></div></div>${details}<div class="receipt-note">هذا وصل تسجيل طلب، وليس إثباتاً لاستلام المبلغ. التحويل الإلكتروني يحتاج تأكيد إدارة المتجر، والدفع عند الاستلام يُسدَّد عند التسليم.</div><div class="receipt-footer">شكراً لثقتكم بمتجرنا ♡</div></div></article>`;
+}
+let lastCustomerReceipt=null;
+function printReceipt(info){
+  if(!info)return alert('الوصل غير متاح حالياً');
+  const w=window.open('','_blank');if(!w)return alert('اسمح بالنوافذ المنبثقة حتى تگدر تطبع الوصل أو تحفظه PDF');
+  w.opener=null;
+  const html='<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>وصل طلب #'+receiptEscape(info.id)+'</title><style>body{margin:0;padding:12px;background:#f3f6f9}'+RECEIPT_CSS+'</style></head><body>'+receiptMarkup(info)+'</body></html>';
+  w.document.open();w.document.write(html);w.document.close();w.focus();
+  // Give the print document a moment to lay out; the user triggered this popup.
+  if(w.document.readyState==='complete'){w.focus();w.print()}
+  else w.addEventListener('load',()=>{w.focus();w.print()},{once:true});
+}
+
 function cartEntries(){return Object.entries(cart).map(([id,qty])=>({p:products.find(x=>x.id===Number(id)),qty})).filter(x=>x.p&&x.p.active)}
 function subtotal(){return cartEntries().reduce((s,x)=>s+x.p.price*x.qty,0)}
 function addCart(id){
@@ -640,6 +698,7 @@ $('search').oninput=renderProducts;$('homeBtn').onclick=()=>show('shop');$('back
 for(const province of ['بغداد','البصرة','نينوى','أربيل','النجف','كربلاء','ذي قار','ميسان','المثنى','القادسية','واسط','بابل','ديالى','الأنبار','صلاح الدين','كركوك','دهوك','السليمانية'])$('checkoutForm').elements.province.add(new Option(province,province));
 $('checkoutForm').onsubmit=e=>{e.preventDefault();if(!cartEntries().length)return;const f=new FormData(e.currentTarget),summary=$('reviewDetails');summary.replaceChildren();for(const [label,key] of [['الاسم','name'],['الهاتف','phone'],['المحافظة','province'],['المنطقة','district'],['العنوان','address'],['الملاحظات','notes']])summary.append(node('p',label+': '+(f.get(key)||'—')));for(const {p,qty} of cartEntries())summary.append(node('p',p.name+' × '+qty+' — '+money(p.price*qty)));summary.append(node('h3','الإجمالي: '+money(subtotal()+config.delivery_fee)));$('checkoutForm').classList.add('hidden');$('review').classList.remove('hidden')};
 $('editOrder').onclick=()=>{$('review').classList.add('hidden');$('checkoutForm').classList.remove('hidden')};
+$('printCustomerReceipt').onclick=()=>printReceipt(lastCustomerReceipt);
 $('confirmOrder').onclick=async()=>{if(!db)return alert('لم يتم ربط Supabase');const f=new FormData($('checkoutForm'));const b=$('confirmOrder');b.disabled=true;try{const {data,error}=await db.rpc('store_checkout',{p_name:f.get('name'),p_phone:f.get('phone'),p_province:f.get('province'),p_district:f.get('district'),p_address:f.get('address'),p_notes:f.get('notes'),p_items:cartEntries().map(x=>({id:x.p.id,qty:x.qty}))});if(error)throw error;cart={};saveCart();$('checkoutForm').reset();$('checkoutForm').classList.remove('hidden');$('review').classList.add('hidden');$('doneText').textContent='رقم طلبك: '+data+' — راح نتواصل وياك لتأكيد التفاصيل.';show('done')}catch(e){alert('تعذر إرسال الطلب: '+e.message)}finally{b.disabled=false}};
 $('adminBtn').onclick=async()=>{show('admin');await checkAuth()};
 async function checkAuth(){if(!db)return msg('loginMsg','اربط Supabase أولاً');const {data:{user}}=await db.auth.getUser();isAdmin=false;if(user){const {data}=await db.rpc('store_is_admin');isAdmin=data===true}$('loginPanel').classList.toggle('hidden',isAdmin);$('adminContent').classList.toggle('hidden',!isAdmin);if(isAdmin)await loadAdmin();else if(user)msg('loginMsg','هذا الحساب لا يمتلك صلاحية الإدارة')}
@@ -760,6 +819,13 @@ $('confirmOrder').onclick=async()=>{
   if(deliveryByProvince()===null)return alert('اختار المحافظة أولاً');
   b.disabled=true;
   const method=chosenPayment();
+  const receiptDraft={
+    store_name:config.name, customer_name:f.get('name'),phone:f.get('phone'),
+    province:f.get('province'),district:f.get('district'),address:f.get('address'),
+    notes:f.get('notes'),items:cartEntries().map(({p,qty})=>({product_name:p.name,quantity:qty,unit_price:Number(p.price)})),
+    delivery_fee:deliveryByProvince(),total:subtotal()+deliveryByProvince(),
+    payment_method:method,payment_label:method==='transfer'?'بانتظار تأكيد التحويل':'الدفع عند الاستلام',status:'قيد الانتظار'
+  };
   try{
     let receiptPath=null;
     if(method==='transfer'){
@@ -781,6 +847,9 @@ $('confirmOrder').onclick=async()=>{
     }
     if(result.error)throw result.error;
     const data=result.data;
+    lastCustomerReceipt={...receiptDraft,id:data,created_at:new Date().toISOString()};
+    $('customerReceiptPreview').innerHTML=receiptMarkup(lastCustomerReceipt);
+    $('printCustomerReceipt').classList.remove('hidden');
     cart={};saveCart();$('checkoutForm').reset();updatePaymentUI();$('checkoutForm').classList.remove('hidden');$('review').classList.add('hidden');
     $('doneText').textContent='رقم طلبك: '+data+(method==='transfer'?' — تم استلام صورة الوصل، وننتظر التأكد من وصول المبلغ.':' — راح نتواصل وياك لتأكيد التفاصيل.');show('done');
   }catch(e){alert('تعذر إرسال الطلب: '+e.message+'\nإذا رفعت وصل قبل حدوث الخطأ، لا تعيد المحاولة مرات كثيرة، تواصل ويانا.')}finally{b.disabled=false}
