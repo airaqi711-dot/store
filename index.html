@@ -566,7 +566,17 @@ html[data-theme="dark"] .product.product-modern .modern-title{color:#fff!importa
   .product.product-modern .modern-cart .card-cart-icon{width:26px;height:26px}
 }
 
-</style></head><body><header class="site-header">
+</style>
+<meta name="theme-color" content="#1c3168">
+<meta name="application-name" content="الإبداع">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="الإبداع">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.webmanifest?v=2">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="192x192" href="./pwa-icon-192.png?v=2">
+</head><body><header class="site-header">
   <div class="topline"><div class="topline-inner"><div class="topline-items"><span>✦ نقش وهدايا حسب الطلب</span><span>◈ الدفع عند الاستلام</span><span>✦ نهتم بالتفاصيل</span></div><div class="top-highlight">✦ الهدية تصير أحلى بلمستك</div></div></div>
   <div class="main-nav">
     <a class="site-brand" href="#shopPage" data-nav="home" aria-label="الصفحة الرئيسية"><img src="assets/logo.jpg" alt="شعار الإبداع" onerror="this.style.display='none'"><span class="wordmark"><span id="brandName">الإبداع للنقش بالليزر</span><small>LASER ENGRAVING</small></span></a>
@@ -980,4 +990,14 @@ loadBanners();
 
 renderCategoryTiles();renderProducts();
 loadShop();
-</script></body></html>
+</script>
+<script>
+// تحويل المتجر إلى تطبيق قابل للتثبيت؛ لا يغيّر دوال الطلبات أو الدفع.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js', {scope: './'})
+      .catch(error => console.warn('تعذّر تفعيل وضع التطبيق:', error));
+  });
+}
+</script>
+</body></html>
