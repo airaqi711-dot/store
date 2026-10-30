@@ -446,6 +446,181 @@ html[data-theme="dark"] .product .info h3 { color: #f7f9ff; }
 html[data-theme="dark"] .product .info .muted { color: #d6e1f0; }
 html[data-theme="dark"] .product .info .price { color: #f4c268; }
 
+
+/* ===== تصميم بطاقات المنتجات الجديد | صورة كاملة + صندوقان منفصلان ===== */
+.product.product-modern{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  overflow:visible;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  min-width:0;
+}
+.product.product-modern:hover{box-shadow:none !important;transform:none}
+.product.product-modern .product-image-wrap{position:relative;min-width:0}
+.product.product-modern .product-photo{
+  display:block;
+  width:100%;
+  aspect-ratio:1 / 1;
+  height:auto;
+  padding:0;
+  border:1px solid #17304a;
+  border-radius:21px;
+  overflow:hidden;
+  background:#edf0f3;
+}
+.product.product-modern .product-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:0;
+}
+/* إلغاء الضباب بين الصورة والنص في التصميم القديم */
+.product.product-modern .product-photo::after{display:none !important;content:none !important}
+.product.product-modern .favorite-btn{
+  top:15px !important;
+  left:15px !important;
+  width:47px !important;
+  height:47px !important;
+  min-height:47px !important;
+  min-width:47px !important;
+  max-width:47px !important;
+  border-radius:50% !important;
+  background:#fffffff5 !important;
+  color:#15334b !important;
+  border:1px solid #d1dfe7 !important;
+  padding:9px !important;
+  box-shadow:0 2px 9px #0002;
+}
+.product.product-modern .favorite-btn svg{width:25px;height:25px}
+.product.product-modern .favorite-btn.saved{color:#cf3e56 !important}
+.product.product-modern .modern-footer{
+  display:grid;
+  grid-template-columns:minmax(0,1.22fr) minmax(0,.96fr);
+  gap:7px;
+  direction:rtl;
+  align-items:stretch;
+  min-height:113px;
+}
+.product.product-modern .modern-info,
+.product.product-modern .modern-cart{
+  min-width:0;
+  background:#0b203d !important;
+  background-color:#0b203d !important;
+  border:1px solid #071529 !important;
+  border-radius:21px;
+  box-shadow:none;
+  color:#fff !important;
+}
+.product.product-modern .modern-info{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:11px 8px;
+  overflow:hidden;
+  isolation:auto;
+}
+.product.product-modern .modern-info::before,
+.product.product-modern .modern-info::after{display:none !important;content:none !important}
+.product.product-modern .modern-info h3{
+  color:#fff !important;
+  font-size:clamp(16px,2vw,30px);
+  line-height:1.23;
+  font-weight:900;
+  min-height:0;
+  margin:0 0 6px;
+  width:100%;
+  text-align:center;
+  overflow-wrap:anywhere;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.product.product-modern .modern-info .price,
+html:not([data-theme="dark"]) .product.product-modern .modern-info .price,
+html[data-theme="dark"] .product.product-modern .modern-info .price{
+  color:#f3bd5b !important;
+  font-size:clamp(16px,1.85vw,27px);
+  font-weight:900;
+  line-height:1.2;
+  margin:0;
+  width:100%;
+  text-align:center;
+  direction:ltr;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.product.product-modern .modern-cart{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  padding:9px 5px;
+  width:100%;
+  height:100%;
+  font-weight:800;
+  cursor:pointer;
+}
+.product.product-modern .modern-cart:hover,
+.product.product-modern .modern-cart:focus-visible{
+  background:#17385e !important;
+  background-color:#17385e !important;
+}
+.product.product-modern .modern-cart .cart-label{
+  display:block;
+  font-size:clamp(12px,1.4vw,19px);
+  line-height:1.2;
+  text-align:center;
+  white-space:normal;
+}
+.product.product-modern .modern-cart .card-cart-icon{
+  width:50px;
+  height:50px;
+  flex-shrink:0;
+  fill:none;
+  stroke:#fff;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+@media(max-width:650px){
+  .product.product-modern{gap:5px}
+  .product.product-modern .product-photo{border-radius:14px}
+  .product.product-modern .favorite-btn{
+    top:8px !important;left:8px !important;
+    width:32px !important;height:32px !important;
+    min-width:32px !important;max-width:32px !important;min-height:32px !important;
+    padding:6px !important;
+  }
+  .product.product-modern .favorite-btn svg{width:19px;height:19px}
+  .product.product-modern .modern-footer{gap:5px;min-height:83px;grid-template-columns:minmax(0,1.2fr) minmax(0,.97fr)}
+  .product.product-modern .modern-info,
+  .product.product-modern .modern-cart{border-radius:12px}
+  .product.product-modern .modern-info{padding:7px 3px}
+  .product.product-modern .modern-info h3{font-size:clamp(12px,3.8vw,17px);margin:0 0 5px;line-height:1.25}
+  .product.product-modern .modern-info .price,
+  html:not([data-theme="dark"]) .product.product-modern .modern-info .price,
+  html[data-theme="dark"] .product.product-modern .modern-info .price{font-size:clamp(11px,3.1vw,16px)}
+  .product.product-modern .modern-cart{gap:3px;padding:7px 2px}
+  .product.product-modern .modern-cart .cart-label{font-size:clamp(10px,2.7vw,13px)}
+  .product.product-modern .modern-cart .card-cart-icon{width:32px;height:32px}
+}
+@media(max-width:370px){
+  .product.product-modern .modern-footer{grid-template-columns:minmax(0,1.1fr) minmax(0,.93fr)}
+  .product.product-modern .modern-info .price,
+  html:not([data-theme="dark"]) .product.product-modern .modern-info .price,
+  html[data-theme="dark"] .product.product-modern .modern-info .price{font-size:10.5px}
+  .product.product-modern .modern-cart .cart-label{font-size:10px}
+}
+
 </style></head><body><header class="site-header">
   <div class="topline"><div class="topline-inner"><div class="topline-items"><span>✦ نقش وهدايا حسب الطلب</span><span>◈ الدفع عند الاستلام</span><span>✦ نهتم بالتفاصيل</span></div><div class="top-highlight">✦ الهدية تصير أحلى بلمستك</div></div></div>
   <div class="main-nav">
@@ -633,22 +808,24 @@ $('galleryOverlay').onclick=e=>{if(e.target===$('galleryOverlay'))closeProduct()
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('galleryOverlay').classList.contains('hidden'))closeProduct()});
 
 function productCard(p){
- const card=node('article','');card.className='product';
+ const card=node('article','');card.className='product product-modern';
  const photo=document.createElement('button');photo.type='button';photo.className='product-photo';photo.setAttribute('aria-label','عرض صور '+p.name);photo.onclick=()=>openProduct(p);
  const img=document.createElement('img');img.src=productImages(p)[0]||'assets/logo.jpg';img.alt=p.name;img.loading='lazy';img.onerror=()=>{img.onerror=null;img.src='assets/logo.jpg'};photo.append(img);
  const love=document.createElement('button');love.type='button';love.className='favorite-btn'+(liked.has(p.id)?' saved':'');love.setAttribute('aria-label',liked.has(p.id)?'إزالة من المفضلة':'أضف إلى المفضلة');love.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg>';
  love.onclick=()=>{if(liked.has(p.id))liked.delete(p.id);else liked.add(p.id);try{localStorage.setItem('ibdaa_favorites',JSON.stringify([...liked]))}catch{}love.classList.toggle('saved',liked.has(p.id));love.setAttribute('aria-label',liked.has(p.id)?'إزالة من المفضلة':'أضف إلى المفضلة')};
- const imageWrap=document.createElement('div');imageWrap.style.position='relative';imageWrap.append(photo,love);
- const info=node('div','');info.className='info';
- // نستخدم نفس صورة المنتج كخلفية ضبابية في منطقة التفاصيل فقط.
- const updateBlurImage=()=>info.style.setProperty('--card-photo','url('+JSON.stringify(img.src)+')');
- updateBlurImage();
- img.addEventListener('error',updateBlurImage,{once:true});
- const name=node('h3',p.name);name.tabIndex=0;name.onclick=()=>openProduct(p);name.onkeydown=e=>{if(e.key==='Enter')openProduct(p)};
- const note=node('div',p.description||p.category||'');note.className='muted';
+ const imageWrap=document.createElement('div');imageWrap.className='product-image-wrap';imageWrap.append(photo,love);
+ const footer=node('div','');footer.className='modern-footer';
+ const info=node('div','');info.className='info modern-info';
+ const name=node('h3',p.name);name.tabIndex=0;name.onclick=()=>openProduct(p);name.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openProduct(p)}};
  const price=node('div',money(p.price));price.className='price';
- const b=node('button','🛒 أضف إلى السلة');b.type='button';b.className='add-btn';b.onclick=()=>{addCart(p.id);b.textContent='✓ تمت الإضافة';setTimeout(()=>b.textContent='🛒 أضف إلى السلة',1100)};
- info.append(name,note,price,b);card.append(imageWrap,info);return card;
+ info.append(name,price);
+ const b=document.createElement('button');b.type='button';b.className='add-btn modern-cart';b.setAttribute('aria-label','أضف '+p.name+' إلى السلة');
+ const label=node('span','أضف إلى السلة');label.className='cart-label';
+ const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');icon.setAttribute('class','card-cart-icon');icon.setAttribute('viewBox','0 0 64 64');icon.setAttribute('aria-hidden','true');icon.innerHTML='<circle cx="25" cy="55" r="3.5"/><circle cx="49" cy="55" r="3.5"/><path d="M5 9h9l7 34h31l6-25H17"/><path d="M22 28h33M24 36h29M30 18l3 25M44 18l-2 25"/>';
+ b.append(label,icon);
+ let resetTimer;
+ b.onclick=()=>{addCart(p.id);label.textContent='✓ تمت الإضافة';clearTimeout(resetTimer);resetTimer=setTimeout(()=>{label.textContent='أضف إلى السلة'},1100)};
+ footer.append(info,b);card.append(imageWrap,footer);return card;
 }
 function renderProducts(){
  const q=$('search').value.trim().toLowerCase();const list=products.filter(p=>p.active&&categoryMatches(p,activeCategory)&&[p.name,p.description,p.category].some(x=>String(x||'').toLowerCase().includes(q)));
