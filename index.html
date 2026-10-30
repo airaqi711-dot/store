@@ -1107,4 +1107,110 @@ if ('serviceWorker' in navigator) {
   }
 })();
 </script>
+  
+<!-- تعديل شكل أيقونة تحميل التطبيق فقط -->
+<style>
+/* وضع الأيقونة بجانب روابط التواصل */
+.contact-app-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  direction: rtl;
+}
+
+.contact-app-row #social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.contact-app-row #smartAppDownload {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.contact-app-row #smartAppDownload
+.smart-app-image-link {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: none;
+  line-height: 0;
+}
+
+.contact-app-row #smartAppDownload
+.smart-app-image-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 636 / 146;
+  object-fit: contain;
+}
+
+.contact-app-row #smartAppDownloadHelp {
+  display: none;
+}
+
+/* تنسيق شاشات الموبايل */
+@media (max-width: 480px) {
+  .contact-app-row {
+    gap: 6px;
+  }
+
+  .contact-app-row #social {
+    gap: 5px;
+  }
+
+  .contact-app-row #social a {
+    padding: 7px;
+  }
+
+  .contact-app-row #smartAppDownload
+  .smart-app-image-link {
+    border-radius: 9px;
+  }
+}
+</style>
+
+<script>
+(() => {
+  const social =
+    document.getElementById('social');
+
+  const download =
+    document.getElementById('smartAppDownload');
+
+  const link =
+    document.getElementById('smartAppDownloadAction');
+
+  const image = link?.querySelector('img');
+
+  if (!social || !download || !link || !image) {
+    return;
+  }
+
+  // وضع التحميل بجانب أيقونات التواصل
+  const row = document.createElement('div');
+  row.className = 'contact-app-row';
+
+  social.parentNode.insertBefore(row, social);
+  row.append(social, download);
+
+  // الأيقونة الجديدة
+  image.src = './download-app-badge.png';
+  image.alt = 'حمّل تطبيق الإبداع';
+  image.width = 636;
+  image.height = 146;
+})();
+</script>
+
 </body></html>
